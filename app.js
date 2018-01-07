@@ -157,28 +157,7 @@ app.delete("/api/qans/:id", function(req, res){
     });
 });
  
-app.put("/api/qans", jsonParser, function(req, res){
-      
-    if(!req.body) return res.sendStatus(400);
-    var id = new objectId(req.body.id);
-    var myAnswer1 = req.body.Answer1;
-    var myAnswer2 = req.body.Answer2;
-    var myAnswer3 = req.body.Answer3;
-    var userAdi = req.body.adi;
-     
-    mongoClient.connect(url, function(err, db){
-        db.collection("qans").findOneAndUpdate({_id: id}, { $set: {Answer1: myAnswer1 , Answer2: myAnswer2 , Answer3: myAnswer3 , adi:userAdi}},
-             {returnOriginal: false },function(err, result){
-             
-            if(err) return res.status(400).send();
-             
-            var qan = result.value;
-            res.send(qan);
-            db.close();
-        });
-    });
-});
-  
+
 app.listen(3000, function(){
     console.log("Сервер запущен...");
 });
