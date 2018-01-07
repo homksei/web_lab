@@ -86,13 +86,6 @@ app.get("/", function(request, response)
 });
 
 
-/*var userScheme = new Schema({
-        Answer1: Number,
-        Answer2: Number,
-        Answer3: Number
-        });
-
-*/
 
 
 
