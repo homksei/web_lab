@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Вход</title>
+<style>
+        body {
+         background: url(fon.jpg); 
+         background-size: 100%; 
+        }
+       </style>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
+
+<script>
+$(document).ready(function(){
+    var email,pass;
+    $("#submit").click(function(){
+        email=$("#email").val();
+        pass=$("#password").val();
+       
+        $.post("http://localhost:3000/login",{email:email,pass:pass},function(data){        
+            if(data==='done')           
+            {
+                window.location.href="/ ";
+            }
+        });
+    });
+});
+</script>
+</head>
+<body>
+<form role="form">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="form-group col-md-offset-4 col-md-4 control-group">
+     <br>
+     <input type="email" class="form-control" id="email" placeholder="Введите email">
+    <br>
+     
+     <input type="password" class="form-control" id="pass" placeholder="Пароль">
+    <br>
+     <input class="col-md-offset-5 btn btn-6 btn-6d "  type="button" value="Войти" id="submit">
+    </div>
+   </form>
+</body>
+</html>

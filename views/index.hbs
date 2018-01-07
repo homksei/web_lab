@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Тестирование</title>
+<style>
+   body {
+    background: url(fon3.jpg); 
+    background-size: 100%; 
+   }
+  </style>
+  <style>
+       .whitetext {
+        color: white;
+}
+  </style>
+      
+  
+      
+ <style type="text/css">
+   table {
+    background: rgb(253, 253, 253); /* Цвет фона таблицы */
+    color: rgb(0, 0, 0); /* Цвет текста */
+   }
+   td {
+    background: rgb(255, 255, 255); /* Цвет фона ячеек */
+   }
+    th {
+     text-shadow: 1px 1px 2px black, 0 0 1em white; 
+    color: white;
+   
+
+   }
+ </style>
+   
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+</head>
+<body>
+     <h2  align="center" > Т E С Т И Р О В А Н И Е  </h2>
+     <h5  align="center">  Добро Пожаловать {{loogiin}} </h5>
+<a  class="btn btn-6 btn-6d col-md-offset-5 col-md-2" href="/logout">Выйти</a><br>
+
+<form name="userForm">
+                <input type="hidden" name="id" value="0" />
+                <!--<div class="form-group">-->
+ 
+  
+                <ol class=" col-md-offset-5 col-md-5"><li ><input type="hidden" name="T1" value=" " /><b>{{Question1_1}}</b><br/>
+                <input type="radio" value="0" name="Q1"/> {{Answer1_1}}<br />
+                <input type="radio" value="1" name="Q1"/> {{Answer2_1}}<br />
+                <input type="radio" value="2" name="Q1"/> {{Answer3_1}}<br />
+                <input type="radio" value="3" name="Q1"/> {{Answer4_1}}<br />
+                <br/></li><li><input type="hidden" name="T2" value=" " /><b> {{Question2_2}}</b><br/>
+                <input type="radio" value="0" name="Q2"/> {{Answer1_2}}<br />
+                <input type="radio" value="1" name="Q2"/> {{Answer2_2}}<br />
+                <input type="radio" value="2" name="Q2"/> {{Answer3_2}}<br />
+                <input type="radio" value="3" name="Q2"/> {{Answer4_2}}<br />
+                <br/></li><li><input type="hidden" name="T3" value=" " /><b> {{Question3_3}}</b><br/>
+                <input type="radio" value="0" name="Q3"/> {{Answer1_3}}<br />
+                <input type="radio" value="1" name="Q3"/> {{Answer2_3}}<br />
+                <input type="radio" value="2" name="Q3"/> {{Answer3_3}}<br />
+                <input type="radio" value="3" name="Q3"/> {{Answer4_3}}<br />
+                <input type="hidden" name="adi" value="{{loogiin}}" />
+                    <br/></li></ol>    
+                <!--</div>-->
+  </div>
+               </div>
+                <div class="panel-body">
+                <!--<input onclick="check_me()" class="btn btn-sm btn-primary" type="button" value="Завершить ответ"/>-->
+                    <button  type="submit" onclick="check_me()" class="btn btn-6 btn-6d col-md-2  col-md-offset-5">Завершить ответ</button>
+                  <!--  <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>     class="btn btn-sm btn-primary"      -->
+                
+                </div>
+            </form>
+   
+        <h2 align="center">Результаты теста и история </h2>
+    <table class="table table-condensed table-striped table-bordered table-hover ">
+        <thead><tr><th >Вопрос 1</th><th>Вопрос 2</th><th>Вопрос 3</th><th></th></tr></thead>
+        <tbody>
+        </tbody>
+    </table>
+  
+    <script>
+
+var res="313"; 
+var s;
+var nok=0;
+var i;
+
+function check_me()
+   {
+    nok=0;
+document.userForm.T1.value = " ";
+document.userForm.T2.value = " "; 
+document.userForm.T3.value = " ";
+
+ 
+    
+       var count=0;
+       with(document.userForm) {
+   if (!Q1[0].checked&&!Q1[1].checked&&!Q1[2].checked&&!Q1[3].checked)  
+   {count+=1};  
+   if (!Q2[0].checked&&!Q2[1].checked&&!Q2[2].checked&&!Q2[3].checked)  
+   {count+=1};  
+   if (!Q3[0].checked&&!Q3[1].checked&&!Q3[2].checked&&!Q3[3].checked)  
+   {count+=1};  
+   if (count>0) alert("Вы выполнили не все задания. Проверьте себя!")    
+           else answer();
+       }
+    }
+    
+   function control(k, f1,f2,f3) {
+   if (k==1&&f1.checked) return true;
+   if (k==2&&f2.checked) return true;
+   if (k==3&&f3.checked) return true;
+   return false;
+   }
+   
+   function answer() {
+   answ="";
+        with(document)    {
+   answ+=control(res.charAt(0) ,userForm.Q1[0],userForm.Q1[1],userForm.Q1[2],userForm.Q1[3])?"1":"0";
+   answ+=control(res.charAt(1) ,userForm.Q2[0],userForm.Q2[1],userForm.Q2[2],userForm.Q2[3])?"1":"0";
+   answ+=control(res.charAt(2) ,userForm.Q3[0],userForm.Q3[1],userForm.Q3[2],userForm.Q3[3])?"1":"0";
+   
+   showResult();
+       }
+   }
+    
+  function showResult()   {
+       
+    
+  for (i=0; i<answ.length;i++)
+    {
+        nok+=answ.charAt(i)=="1"?1:0;
+    }
+   if(nok==3) s = "Тест пройден";
+   if(nok!=3) s = "Тест не пройден";
+
+
+    
+   with(document.userForm)
+       {
+       if (answ.charAt(0)=="1") {T1.value=" + "} else {T1.value=" - "};
+       if (answ.charAt(1)=="1") {T2.value=" + "} else {T2.value=" - "};
+       if (answ.charAt(2)=="1") {T3.value=" + "} else {T3.value=" - "};
+       }
+   }
+    
+   function showhide(obj){
+       if(obj == 'none') return 'inline';
+       else return 'none';
+   }
+   
+    
+   
+        // Получение всех результатов
+        function GetAnswers(adi) {
+            $.ajax({
+                url: "/api/qans",
+                type: "GET",
+                contentType: "application/json",
+                success: function (qans) {
+                    var rows = "";
+                    $.each(qans, function (index, qan) {
+                        // добавляем полученные элементы в таблицу
+                        rows += row(qan);
+                    })
+                    $("table tbody").append(rows);
+                 }
+            });
+        }
+
+        // Получение одного результата
+        function GetAnswer(id) {
+            $.ajax({
+                url: "/api/qans/"+id,
+                type: "GET",
+                contentType: "application/json",
+                success: function (qan) {
+                    var form = document.forms["userForm"];
+                    form.elements["id"].value = qan._id;
+                    form.elements["T1"].value = qan.Answer1;
+                    form.elements["T2"].value = qan.Answer2;
+                    form.elements["T3"].value = qan.Answer3;
+                    form.elements["adi"].value = qan.adi;
+                }
+            });
+        }
+
+        // Добавление результата
+        function CreateAnswer(myAnswer1, myAnswer2, myAnswer3, userAdi) {
+            $.ajax({
+                url: "api/qans",
+                contentType: "application/json",
+                method: "POST",
+                data: JSON.stringify({
+                    Answer1: myAnswer1,
+                    Answer2: myAnswer2,
+                    Answer3: myAnswer3,
+                    adi: userAdi,
+                }),
+                success: function (qan) {
+                    reset();
+                    $("table tbody").append(row(qan));
+                }
+            })
+        }
+  
+        // сброс формы
+
+        function reset() {
+            var form = document.forms["userForm"];
+            form.reset();
+            form.elements["id"].value = 0;
+        }
+
+  
+        // Удаление результата
+        function DeleteAnswer(id) {
+            $.ajax({
+                url: "api/qans/"+id,
+                contentType: "application/json",
+                method: "DELETE",
+                success: function (qan) {
+                    console.log(qan);
+                    $("tr[data-rowid='" + qan._id + "']").remove();
+                }
+            })
+        }
+        // создание строки для таблицы
+        var row = function (qan) {
+            return "<tr data-rowid='" + qan._id + "'><td>" + qan.Answer1 + "</td> <td>" + qan.Answer2 + "</td> <td>" + qan.Answer3 + 
+                   "<td><a class='removeLink' data-id='" + qan._id + "'>Удалить</a></td></tr>";
+        }
+        // сброс значений формы
+        $("#reset").click(function (e) {
+  
+            e.preventDefault();
+            reset();
+        })
+  
+        // отправка формы
+        $("form").submit(function (e) {
+            e.preventDefault();
+            var id = this.elements["id"].value;
+            var Answer1 = this.elements["T1"].value;
+            var Answer2 = this.elements["T2"].value;
+            var Answer3 = this.elements["T3"].value;
+            var adi = this.elements["adi"].value;
+            if (id == 0)
+                CreateAnswer(Answer1, Answer2, Answer3, adi);
+            else
+                EditAnswer(id, Answer1, Answer2, Answer3, adi);
+        });
+  
+        // нажимаем на ссылку Удалить
+        $("body").on("click", ".removeLink", function () {
+            var id = $(this).data("id");
+            DeleteAnswer(id);
+        })
+  
+       
+
+// Загрузка результатов
+        GetAnswers();
+    </script>
+</body>
+</html>
