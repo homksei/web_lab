@@ -15,15 +15,20 @@ $(document).ready(function(){
     var email,pass;
     $("#submit").click(function(){
         email=$("#email").val();
-        pass=$("#password").val();
-      
+        pass=$("#pass").val();
+
+        if((email=='')||(pass==''))
+            {
+        alert("Введите данные полностью");   
+            }
+        else{ 
         $.post("http://localhost:3000/login",{email:email,pass:pass},function(data){        
             if(data==='done')           
             {
                 window.location.href="/ ";
             }
         });
-        
+        }
     });
 
 });
@@ -38,7 +43,7 @@ $(document).ready(function(){
      
      <input type="password" class="form-control" id="pass" placeholder="Пароль">
     <br>
-     <input class="col-md-offset-5 btn btn-6 btn-6d "  type="button" value="Войти" id="submit">
+     <input class="col-md-offset-5 btn btn-6 btn-6d"  type="button" value="Войти" id="submit">
     </div>
    </form>
 </body>
