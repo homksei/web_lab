@@ -21,29 +21,13 @@ var milo;
 
 app.get('/reg',function(req,res){
 sess = req.session;
-
-if(sess.email) {
-
-    res.redirect('/admin');
-}
-else {
-    res.render('forma.html');
-}
+res.render('forma.html');
 });
 
 app.post('/login',function(req,res){
   sess = req.session;
-
-  sess.email=req.body.email;
+  sess.email=req.body.email;
   res.end('done');
-});
-
-app.get('/admin',function(req,res){
-  sess = req.session;
-if(sess.email) {
-res.redirect('/');
-milo = sess.email;
-} 
 });
 
 app.get('/logout',function(req,res){
