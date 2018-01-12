@@ -20,7 +20,7 @@
     background: rgb(255, 255, 255); /* Цвет фона ячеек */
    }
     th {
-     text-shadow: 1px 1px 2px black, 0 0 1em white; 
+     text-shadow: 1px 1px 2px black, 0 0 1em white;/* Цвет и размер */     
     color: white;
 }
 
@@ -28,14 +28,24 @@
             text-shadow: 1px 1px 2px black, 0 0 1em white; 
               color: white;
        }
-   </style>
+       .not {
+            position:fixed;
+            width:5;
+            height:5;
+            top:5;
+            right:5;
+        }
 
+   </style>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 <body>
-    
+      <div class="not " id="notifies">
+
+
+    </div>	
      <h2  align="center" > Т E С Т И Р О В А Н И Е  </h2>
      <h5  align="center">  Добро Пожаловать {{loogiin}} </h5>
 <a  class="btn btn-6 btn-6d col-md-offset-5 col-md-2" href="/logout">Выйти</a><br>
@@ -76,11 +86,12 @@
         <tbody>
         </tbody>
     </table>
+
   
     <script>
 
 var res="313"; 
-var s;
+var s=0;
 var nok=0;
 var i;
 var count;
@@ -124,8 +135,7 @@ var count;
         }
   
         // сброс формы
-
-        function reset() {
+            function reset() {
             var form = document.forms["userForm"];
             form.reset();
             form.elements["id"].value = 0;
@@ -150,11 +160,7 @@ var count;
                    "<td><a class='removeLink' data-id='" + qan._id + "'>Удалить</a></td></tr>";
         }
         // сброс значений формы
-        $("#reset").click(function (e) {
-  
-            e.preventDefault();
-            reset();
-        })
+      
   
         // отправка формы
         $("form").submit(function (e) {
@@ -166,8 +172,6 @@ var count;
             var adi = this.elements["adi"].value;
             if ((id == 0)&&(count==0))
                 CreateAnswer(Answer1, Answer2, Answer3, adi);
-           // else
-                //EditAnswer(id, Answer1, Answer2, Answer3, adi);
         });
   
         // нажимаем на ссылку Удалить
@@ -232,8 +236,36 @@ document.userForm.T3.value = " ";
     {
         nok+=answ.charAt(i)=="1"?1:0;
     }
-   if(nok==3) s = "Тест пройден";
-   if(nok!=3) s = "Тест не пройден";
+   if(nok==3){
+   //s = "Тест пройден";
+  // alert(s);
+
+var SummDok = document.getElementById('notifies'), 
+SummSumm='Тест пройден!';
+SummDok.innerHTML = '<strong>Тест пройден! </strong>Отлично, вы просто умница.';
+document.getElementById("notifies").className = 'alert alert-success alert-dismissible fade in not';
+
+$(document).ready (function(){
+                $("#notifies").fadeTo(2000, 500).slideUp(500, function(){
+               $("#notifies").slideUp(500);
+                });   
+            });
+}
+else{
+       //s = "Тест не пройден";
+      // alert(s);
+var SummDok = document.getElementById('notifies'), 
+SummSumm='Тест не пройден';
+SummDok.innerHTML = '<strong>Тест не пройден! </strong>Давайте попробуем ещё.';
+document.getElementById("notifies").className = 'alert alert-danger alert-dismissible fade in not';
+
+$(document).ready (function(){
+                $("#notifies").fadeTo(2000, 500).slideUp(500, function(){
+               $("#notifies").slideUp(500);
+                });   
+            });
+
+   }
 
 
     
